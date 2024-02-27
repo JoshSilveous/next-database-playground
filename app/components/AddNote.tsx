@@ -1,21 +1,23 @@
 'use client'
-import { insertNote } from '@/backend/functions/insertNote'
-import styles from './page.module.css'
-import React, { useState } from 'react'
 
-export function MyForm() {
+import { useState } from 'react'
+import styles from './components.module.css'
+import { addNote } from '@/lib/db/note/addNote'
+import { delay } from '@/lib/utils'
+
+export function AddNote() {
 	const [inputValue, setInputValue] = useState('')
-	const [statusText, setStatusText] = useState('Please submit a note...')
+	const [statusText, setStatusText] = useState('')
 
 	const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
 		e.preventDefault()
 
 		setStatusText('Submitting...')
-
-		insertNote(inputValue).then((result) => {
-			if (result.status === 0) {
-				setStatusText(`Success! ${result.newRow.timestamp}`)
-			}
+		addNote(inputValue).then(() => {
+			setStatusText('Submitted!')
+			delay(1000).then(() => {
+				setStatusText('')
+			})
 		})
 	}
 	return (

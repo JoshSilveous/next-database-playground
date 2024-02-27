@@ -1,3 +1,4 @@
 {
-	"cSpell.words": ["AUTOINCREMENT"]
+	"cSpell.words": ["AUTOINCREMENT"],
+	"exportall.config.folderListener": ["/lib/db", "/lib/db/user", "/lib/utils"]
 }
