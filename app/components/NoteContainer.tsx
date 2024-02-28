@@ -5,6 +5,7 @@ import styles from './NoteContainer.module.scss'
 import { useEffect, useState } from 'react'
 import { getAllNotes } from '@/lib/db/note/getAllNotes'
 import { LoadingNotes } from './LoadingNotes'
+import { DynTable } from '@/lib/components/DynTable'
 
 export function NoteContainer() {
 	const [notes, setNotes] = useState<Note[]>([])
@@ -56,6 +57,7 @@ export function NoteContainer() {
 
 	return (
 		<div className={styles.container}>
+			<DynTable data={people} />
 			<h1>NoteContainer!</h1>
 
 			<div className={styles.table_container}>
