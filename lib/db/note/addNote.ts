@@ -7,5 +7,5 @@ export async function addNote(note: string) {
     `
 
 	console.log(res)
-	return
+	return res.rows[0] as Note
 }

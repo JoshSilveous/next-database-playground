@@ -1,19 +1,25 @@
 'use client'
-import { getAllNotes } from '@/lib/db/note/getAllNotes'
-import { useEffect, useState } from 'react'
+import styles from './NoteContainer.module.scss'
 
-export function NoteTable() {
-	const [notes, setNotes] = useState<Note[]>()
-	useEffect(() => {
-		getAllNotes().then((data) => {
-			setNotes(data)
-		})
-	}, [])
+export function NoteTable({ notes }: { notes: Note[] }) {
+	const notesDisplay = notes.map((note) => {
+		return (
+			<tr>
+				<td>{note.createdAt.toLocaleString()}</td>
+				<td>{note.note_id}</td>
+				<td>{note.text}</td>
+			</tr>
+		)
+	})
 
 	return (
-		<div>
-			NoteTable!
-			<p>{!notes ? 'Loading...' : JSON.stringify(notes)}</p>
-		</div>
+		<table>
+			<tr>
+				<th className={styles.timestamp}>Timestamp</th>
+				<th className={styles.id}>ID</th>
+				<th className={styles.note}>Note</th>
+			</tr>
+			{notesDisplay}
+		</table>
 	)
 }

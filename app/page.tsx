@@ -1,16 +1,15 @@
 import Image from 'next/image'
 import styles from './page.module.css'
-import { AddNote } from './components/AddNote'
 import { seed } from '@/lib/db'
-import { NoteTable } from './components/NoteTable'
+import { NoteContainer } from './components/NoteContainer'
 
 export default function Home() {
 	seed()
 	return (
 		<main className={styles.main}>
-			<div className={styles.card}>Enter a new note in the database</div>
-			<NoteTable />
-			<AddNote />
+			<div className={styles.card}>Home component!</div>
+			<p>This part is SSR'd</p>
+			<NoteContainer />
 		</main>
 	)
 }

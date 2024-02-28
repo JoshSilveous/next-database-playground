@@ -1,11 +1,10 @@
 'use client'
 
 import { useState } from 'react'
-import styles from './components.module.css'
 import { addNote } from '@/lib/db/note/addNote'
 import { delay } from '@/lib/utils'
 
-export function AddNote() {
+export function AddNote({ onNoteAdded }: { onNoteAdded: (note: Note) => any }) {
 	const [inputValue, setInputValue] = useState('')
 	const [statusText, setStatusText] = useState('')
 
@@ -13,15 +12,16 @@ export function AddNote() {
 		e.preventDefault()
 
 		setStatusText('Submitting...')
-		addNote(inputValue).then(() => {
+		addNote(inputValue).then((note) => {
 			setStatusText('Submitted!')
+			onNoteAdded(note)
 			delay(1000).then(() => {
 				setStatusText('')
 			})
 		})
 	}
 	return (
-		<form onSubmit={handleSubmit}>
+		<form onSubmit={handleSubmit} style={{ display: 'flex' }}>
 			<input
 				type='text'
 				value={inputValue}
@@ -30,7 +30,7 @@ export function AddNote() {
 				required
 			/>
 			<button type='submit'>Submit</button>
-			<p className={styles.statustext}>{statusText}</p>
+			<p>{statusText}</p>
 		</form>
 	)
 }
